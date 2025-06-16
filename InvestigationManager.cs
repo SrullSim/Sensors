@@ -10,7 +10,7 @@ namespace Sensors
     {
         Agent agent = new Agent();
 
-        private int score;
+        private static int score = 0 ;
 
         public List<SensorType> sensorTypes;
 
@@ -23,10 +23,17 @@ namespace Sensors
             switch (choice)
             {
                 case "1":
+                    score += agent.GetMatchCount(choice);
+                    showscore();
 
+                    break;
             }
         }
 
+        public void showscore()
+        {
+            Console.WriteLine($"the agent {agent.Name} revealed {score}/{agent.NumOfSensors}");
+        }
 
 
 
