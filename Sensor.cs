@@ -6,8 +6,31 @@ using System.Threading.Tasks;
 
 namespace Sensors
 {
+
+     public enum SensorType
+    {
+        Thermal,
+        Audio,
+        Motion
+    }
+
+
+
     internal class Sensor
     {
+        public SensorType Type { get; set; }
+
+
+        public Sensor() { }
+
+        public void Activate()
+        {
+
+        }
+
+
+
+
 
 
     }

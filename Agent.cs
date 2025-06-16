@@ -18,20 +18,21 @@ namespace Sensors
 
         public Agent() { }
 
-        public string GetMatchCount()
+        public int GetMatchCount(string choice)
         {
-            return "";
+            foreach (var sensor in Sensors)
+            {
+                if (sensor.Type.ToString() == choice)
+                {
+                    return 1;
+                }
+            }
+
+
+            return 1;
         }
 
-        public enum MyEnum { Value1, Value2, Value3, Value4 }
-
-        private static Random rnd = new Random();
-
-        public static MyEnum GetRandomEnumValue()
-        {
-            var values = Enum.GetValues(typeof(MyEnum));
-            return (MyEnum)values.GetValue(rnd.Next(values.Length));
-        }
+        
 
 
 
