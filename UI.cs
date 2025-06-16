@@ -16,7 +16,7 @@ namespace Sensors
             Console.Clear();
             Console.WriteLine("======= Welcome to Game Investigation ======= ");
             Console.WriteLine("please enter the sensor type");
-            Console.WriteLine(" Thermal / Audio / Motion");
+            Console.WriteLine("1.Thermal \n2.Audio \n3.Motion \n4.light");
 
             // take choice from player
             string sensorName = Console.ReadLine();

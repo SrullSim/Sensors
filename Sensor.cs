@@ -23,7 +23,7 @@ namespace Sensors
 
         public Sensor() { }
 
-        public void Activate()
+        void Activate()
         {
 
         }
