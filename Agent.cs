@@ -8,10 +8,10 @@ namespace Sensors
 {
     public enum RankAgentEnum
     {
-        Bginer = 2,
+        Foot_Soldier = 2,
         Pro = 3,
         Master = 4,
-        Legendשry = 5
+        Legendary = 5
     }
     internal class Agent
     {
@@ -25,12 +25,11 @@ namespace Sensors
         public Dictionary<SensorType, int> sensorStatus { get; set; }
 
 
-
-
+        // constractor
         public Agent(RankAgentEnum rank) 
         {
             this.Rank = rank;
-            int rankValue = (int)Rank; 
+            rankValue = (int)Rank; 
             this.Weaknesses = AddSensorsToWeaknesses();
         }
 
@@ -50,10 +49,9 @@ namespace Sensors
                 Weaknesses.Add(sensor);
             }
             return Weaknesses;
-
         }
 
-        // get random number for ndex
+        // get random number for index
         public static int setIndex(int limit)
         {
             Random random = new Random();
@@ -87,19 +85,40 @@ namespace Sensors
             }
 
         }
- 
-        public int GetMatchCount(string sensorType)
+
+        public void showdict()
         {
-            
-            foreach (var sensor in Weaknesses)
+        }
+ 
+        //public int GetMatchCount(string sensorType)
+        //{
+            public int GetMatchCount(string sensorTypeIndex)
+        {
+            // ננסה להמיר את המחרוזת למספר
+            if (!int.TryParse(sensorTypeIndex, out int index))
+                return 0;
+
+            // נבדוק אם המספר תואם לערך ב-Enum
+            if (!Enum.IsDefined(typeof(SensorType), index))
+                return 0;
+
+            SensorType sensorType = (SensorType)index;
+
+            // נחפש סנסור מתאים
+            for (int i = 0; i < Weaknesses.Count; i++)
             {
-                if (sensor.Type.ToString() == sensorType)
+                if (Weaknesses[i].Type == sensorType)
                 {
-                    Weaknesses.Remove(sensor);
+                    Weaknesses.RemoveAt(i);
                     return 1;
                 }
             }
             return 0;
         }
+
+
+
+
+
     }
 }

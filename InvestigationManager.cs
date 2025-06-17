@@ -8,20 +8,19 @@ namespace Sensors
 {
     internal class InvestigationManager
     {
-        Agent agent = new Agent(RankAgentEnum.Bginer);
-
+        Agent agent = new Agent(RankAgentEnum.Foot_Soldier);
         private static int score = 0 ;
-
         private int turn { get; set; } = 0;
-
-        public List<SensorType> sensorTypes;
-
-
+        //public List<SensorType> sensorTypes;
+        
+        // constractor 1
         public InvestigationManager() { }
 
-
+    // methods
+    
         public void processSelection()
         {
+            Console.WriteLine("5555"+agent.rankValue);
             while(score < agent.rankValue)
             {
                 //Console.Clear();
@@ -61,26 +60,11 @@ namespace Sensors
                 }
             } 
         }
-
-
         public void showscore()
         {
             Console.WriteLine($"the agent {agent.Name} revealed {score}/{agent.Rank}");
         }
 
-
-
-
-
-
-
-
-
-        public static int setIndex(int limit)
-        {
-            Random random = new Random();
-            return random.Next(0, limit);
-        }
 
     }
 }
