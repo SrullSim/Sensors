@@ -11,7 +11,8 @@ namespace Sensors
     {
         Thermal,
         Audio,
-        Motion
+        Motion,
+        light
     }
 
 

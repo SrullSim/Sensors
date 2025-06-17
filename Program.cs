@@ -6,7 +6,7 @@
         {
             InvestigationManager investigationManager = new InvestigationManager();
 
-            investigationManager.processSelection();
+            investigationManager.runProcess();
         }
     }
 }

@@ -18,43 +18,35 @@ namespace Sensors
 
     // methods
     
-        public void processSelection()
+        public void runProcess()
         {
             Console.WriteLine("5555"+agent.rankValue);
             while(score < agent.rankValue)
             {
-                //Console.Clear();
+
                 string choice = UI.menu();
                 this.turn++;
                 switch (choice)
                 {
                     case "1":
-                        score += agent.GetMatchCount(choice);
+                        score += agent.GetMatchCount("Thermal");
                         showscore();
-                        agent.ShowWeaknesses();
                         break;
-
                     case "2":
-                        score += agent.GetMatchCount(choice);
+                        score += agent.GetMatchCount("Audio");
                         showscore();
-                        agent.ShowWeaknesses();
-
                         break;
                     case "3":
-                        score += agent.GetMatchCount(choice);
+                        score += agent.GetMatchCount("Motion");
                         showscore();
-                        agent.ShowWeaknesses();
-
                         break;
                     case "4":
-                        score += agent.GetMatchCount(choice);
+                        score += agent.GetMatchCount("light");
                         showscore();
-                        agent.ShowWeaknesses();
-
                         break;
                     default:
                         Console.WriteLine("Invalid choice, please try again.");
-                        processSelection();
+                        runProcess();
 
                         break;
                 }
@@ -62,7 +54,8 @@ namespace Sensors
         }
         public void showscore()
         {
-            Console.WriteLine($"the agent {agent.Name} revealed {score}/{agent.Rank}");
+            Console.WriteLine($"the agent {agent.Name} revealed {score}/{agent.rankValue}");
+            
         }
 
 

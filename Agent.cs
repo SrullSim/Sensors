@@ -9,9 +9,9 @@ namespace Sensors
     public enum RankAgentEnum
     {
         Foot_Soldier = 2,
-        Pro = 3,
-        Master = 4,
-        Legendary = 5
+        Squad_Leader = 4,
+        Senior_Commander = 6,
+        Organization_Leader = 8
     }
     internal class Agent
     {
@@ -20,16 +20,16 @@ namespace Sensors
         public string Name { get; set; }
         public List<string> Sensors { get; set; }
         private List<Sensor> Weaknesses { get; set; }
-        public RankAgentEnum Rank {  get; set; }
+        public RankAgentEnum Rank { get; set; }
         public int rankValue { get; set; }
         public Dictionary<SensorType, int> sensorStatus { get; set; }
 
 
         // constractor
-        public Agent(RankAgentEnum rank) 
+        public Agent(RankAgentEnum rank)
         {
             this.Rank = rank;
-            rankValue = (int)Rank; 
+            rankValue = (int)Rank;
             this.Weaknesses = AddSensorsToWeaknesses();
         }
 
@@ -72,7 +72,7 @@ namespace Sensors
         public void setDictsensorStatus()
         {
             sensorStatus = new Dictionary<SensorType, int>();
-            foreach(var sens in Weaknesses)
+            foreach (var sens in Weaknesses)
             {
                 if (sensorStatus.ContainsKey(sens.Type))
                 {
@@ -89,32 +89,23 @@ namespace Sensors
         public void showdict()
         {
         }
- 
-        //public int GetMatchCount(string sensorType)
-        //{
-            public int GetMatchCount(string sensorTypeIndex)
+
+
+        public int GetMatchCount(string sensorType)
         {
-            // ננסה להמיר את המחרוזת למספר
-            if (!int.TryParse(sensorTypeIndex, out int index))
-                return 0;
-
-            // נבדוק אם המספר תואם לערך ב-Enum
-            if (!Enum.IsDefined(typeof(SensorType), index))
-                return 0;
-
-            SensorType sensorType = (SensorType)index;
-
-            // נחפש סנסור מתאים
             for (int i = 0; i < Weaknesses.Count; i++)
             {
-                if (Weaknesses[i].Type == sensorType)
+                if (Weaknesses[i].Type.ToString() == sensorType)
                 {
-                    Weaknesses.RemoveAt(i);
                     return 1;
                 }
             }
             return 0;
         }
+
+
+
+
 
 
 
