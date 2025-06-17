@@ -21,16 +21,73 @@ namespace Sensors
         public List<string> Sensors { get; set; }
         private List<Sensor> Weaknesses { get; set; }
         public RankAgentEnum Rank {  get; set; }
+        public int rankValue { get; set; }
+        public Dictionary<SensorType, int> sensorStatus { get; set; }
 
 
 
 
         public Agent(RankAgentEnum rank) 
         {
-            Rank = rank;
-            Weaknesses = AddSensorsToWeaknesses();
+            this.Rank = rank;
+            int rankValue = (int)Rank; 
+            this.Weaknesses = AddSensorsToWeaknesses();
         }
 
+        public void setName(string name)
+        {
+            this.Name = name;
+        }
+
+        // set weaknesses        
+        public List<Sensor> AddSensorsToWeaknesses()
+        {
+            Weaknesses = new List<Sensor>();
+            for (int len = 0; len < (int)Rank; len++)
+            {
+                Sensor sensor = new Sensor();
+                sensor.Type = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(setIndex(rankValue));
+                Weaknesses.Add(sensor);
+            }
+            return Weaknesses;
+
+        }
+
+        // get random number for ndex
+        public static int setIndex(int limit)
+        {
+            Random random = new Random();
+            return random.Next(0, limit);
+        }
+
+        // for testing
+        public void ShowWeaknesses()
+        {
+            Console.WriteLine("Agent Weaknesses:");
+            foreach (var sensor in Weaknesses)
+            {
+                Console.WriteLine(sensor.Type);
+            }
+        }
+
+        // set the dict we goona work on 
+        public void setDictsensorStatus()
+        {
+            sensorStatus = new Dictionary<SensorType, int>();
+            foreach(var sens in Weaknesses)
+            {
+                if (sensorStatus.ContainsKey(sens.Type))
+                {
+                    sensorStatus[sens.Type]++;
+                }
+                else
+                {
+                    sensorStatus[sens.Type] = 1;
+                }
+            }
+
+        }
+ 
         public int GetMatchCount(string sensorType)
         {
             
@@ -44,39 +101,5 @@ namespace Sensors
             }
             return 0;
         }
-
-        
-        public List<Sensor> AddSensorsToWeaknesses()
-        {
-            Weaknesses = new List<Sensor>();
-            for (int len = 0; len < (int)Rank; len++)
-            {
-                Sensor sensor = new Sensor();
-                sensor.Type = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(setIndex(Rank));
-                Weaknesses.Add(sensor);
-            }
-            return Weaknesses;
-
-        }
-
-
-        public static int setIndex(int limit)
-        {
-            Random random = new Random();
-            return random.Next(0, limit);
-        }
-
-
-        // for teting
-        public void ShowWeaknesses()
-        {
-            Console.WriteLine("Agent Weaknesses:");
-            foreach (var sensor in Weaknesses)
-            {
-                Console.WriteLine(sensor.Type);
-            }
-        }
-
-
     }
 }

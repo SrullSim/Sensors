@@ -12,6 +12,8 @@ namespace Sensors
 
         private static int score = 0 ;
 
+        private int turn { get; set; } = 0;
+
         public List<SensorType> sensorTypes;
 
 
@@ -20,10 +22,11 @@ namespace Sensors
 
         public void processSelection()
         {
-            while(score < agent.Rank)
+            while(score < agent.rankValue)
             {
                 //Console.Clear();
                 string choice = UI.menu();
+                this.turn++;
                 switch (choice)
                 {
                     case "1":
