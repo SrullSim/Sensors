@@ -4,9 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            InvestigationManager investigationManager = new InvestigationManager();
 
-            UI.menu();
+            investigationManager.processSelection();
         }
     }
 }
