@@ -6,6 +6,13 @@ using System.Threading.Tasks;
 
 namespace Sensors
 {
+    public enum RankAgentEnum
+    {
+        Bginer = 2,
+        Pro = 3,
+        Master = 4,
+        Legendשry = 5
+    }
     internal class Agent
     {
 
@@ -13,13 +20,15 @@ namespace Sensors
         public string Name { get; set; }
         public List<string> Sensors { get; set; }
         private List<Sensor> Weaknesses { get; set; }
-        public int NumOfSensors {  get; set; }
+        public RankAgentEnum Rank {  get; set; }
 
 
-        public Agent() 
+
+
+        public Agent(RankAgentEnum rank) 
         {
-            NumOfSensors = Weaknesses.Count();
-            AddSensorsToWeaknesses();
+            Rank = rank;
+            Weaknesses = AddSensorsToWeaknesses();
         }
 
         public int GetMatchCount(string sensorType)
@@ -37,16 +46,17 @@ namespace Sensors
         }
 
         
-        public void AddSensorsToWeaknesses()
+        public List<Sensor> AddSensorsToWeaknesses()
         {
-            for(int len = 0; len < NumOfSensors; len++)
+            Weaknesses = new List<Sensor>();
+            for (int len = 0; len < (int)Rank; len++)
             {
                 Sensor sensor = new Sensor();
-                sensor.Type = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(setIndex(NumOfSensors));
+                sensor.Type = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(setIndex(Rank));
                 Weaknesses.Add(sensor);
-
             }
-            SensorType selected = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(1);
+            return Weaknesses;
+
         }
 
 
@@ -57,7 +67,15 @@ namespace Sensors
         }
 
 
-
+        // for teting
+        public void ShowWeaknesses()
+        {
+            Console.WriteLine("Agent Weaknesses:");
+            foreach (var sensor in Weaknesses)
+            {
+                Console.WriteLine(sensor.Type);
+            }
+        }
 
 
     }
