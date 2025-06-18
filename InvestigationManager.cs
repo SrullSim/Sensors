@@ -8,49 +8,65 @@ namespace Sensors
 {
     internal class InvestigationManager
     {
-        Agent agent = new Agent(RankAgentEnum.Foot_Soldier);
+        Agent agent = new Agent(RankAgentEnum.Senior_Commander);
         private static int score = 0 ;
         private int turn { get; set; } = 0;
-        //public List<SensorType> sensorTypes;
-        
-        // constractor 1
         public InvestigationManager() { }
 
     // methods
     
+        // run the process 
         public void runProcess()
         {
-            Console.WriteLine("5555"+agent.rankValue);
-            while(score < agent.rankValue)
+            agent.setName(UI.setName());
+            while (score < agent.rankValue)
             {
-
-                string choice = UI.menu();
-                this.turn++;
-                switch (choice)
+                if (turn <= 10)
                 {
-                    case "1":
-                        score += agent.GetMatchCount("Thermal");
-                        showscore();
-                        break;
-                    case "2":
-                        score += agent.GetMatchCount("Audio");
-                        showscore();
-                        break;
-                    case "3":
-                        score += agent.GetMatchCount("Motion");
-                        showscore();
-                        break;
-                    case "4":
-                        score += agent.GetMatchCount("light");
-                        showscore();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice, please try again.");
-                        runProcess();
-
-                        break;
+                    //agent.ShowWeaknesses();
+                    string choice = UI.menu();
+                    switch (choice)
+                    {
+                        case "1":
+                            score += agent.GetMatchCount("Thermal");
+                            showscore();          
+                            break;
+                        case "2":
+                            score += agent.GetMatchCount("Audio");
+                            showscore();
+                            break;
+                        case "3":
+                            score += agent.GetMatchCount("Motion");
+                            showscore();
+                            break;
+                        case "4":
+                            score += agent.GetMatchCount("Pulse");
+                            showscore();
+                            break;
+                        case "5":
+                            score += agent.GetMatchCount("Magnetic");
+                            showscore();
+                            break;
+                        case "6":
+                            score += agent.GetMatchCount("Signal");
+                            showscore();
+                            break;
+                        case "7":
+                            score += agent.GetMatchCount("Light");
+                            showscore();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid choice, please try again.");
+                            break;
+                    }
+                    this.turn++;
                 }
-            } 
+                else 
+                {
+
+                } 
+            }
+            
         }
         public void showscore()
         {

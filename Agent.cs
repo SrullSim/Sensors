@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sensors
 {
-    public enum RankAgentEnum
-    {
-        Foot_Soldier = 2,
-        Squad_Leader = 4,
-        Senior_Commander = 6,
-        Organization_Leader = 8
-    }
+    
     internal class Agent
     {
 
@@ -22,7 +16,7 @@ namespace Sensors
         private List<Sensor> Weaknesses { get; set; }
         public RankAgentEnum Rank { get; set; }
         public int rankValue { get; set; }
-        public Dictionary<SensorType, int> sensorStatus { get; set; }
+        public Dictionary<string, int> sensorStatus { get; set; } 
 
 
         // constractor
@@ -31,6 +25,7 @@ namespace Sensors
             this.Rank = rank;
             rankValue = (int)Rank;
             this.Weaknesses = AddSensorsToWeaknesses();
+            this.sensorStatus = setDictsensorStatus();
         }
 
         public void setName(string name)
@@ -42,10 +37,10 @@ namespace Sensors
         public List<Sensor> AddSensorsToWeaknesses()
         {
             Weaknesses = new List<Sensor>();
-            for (int len = 0; len < (int)Rank; len++)
+            for (int sensors = 0; sensors < rankValue; sensors++)
             {
                 Sensor sensor = new Sensor();
-                sensor.Type = (SensorType)Enum.GetValues(typeof(SensorType)).GetValue(setIndex(rankValue));
+                sensor.Type = (@string)Enum.GetValues(typeof(@string)).GetValue(setIndex(rankValue));
                 Weaknesses.Add(sensor);
             }
             return Weaknesses;
@@ -69,47 +64,71 @@ namespace Sensors
         }
 
         // set the dict we goona work on 
-        public void setDictsensorStatus()
+        public Dictionary<string,int> setDictsensorStatus()
         {
-            sensorStatus = new Dictionary<SensorType, int>();
+            Dictionary<string, int> setdict = new Dictionary<string, int>();
             foreach (var sens in Weaknesses)
             {
-                if (sensorStatus.ContainsKey(sens.Type))
+                if (setdict.ContainsKey(sens.Type.ToString()))
                 {
-                    sensorStatus[sens.Type]++;
+                    setdict[sens.Type.ToString()]++;
                 }
                 else
                 {
-                    sensorStatus[sens.Type] = 1;
+                    setdict[sens.Type.ToString()] = 1;
+                    Console.WriteLine("add key " + sens.Type );
                 }
             }
+            return setdict;
 
         }
 
         public void showdict()
         {
-        }
+            if (sensorStatus != null)
+            {
+                Console.WriteLine("get in dict");
+                foreach (KeyValuePair<string, int> sens in sensorStatus)
+                {
+                    Console.WriteLine(sens.Key.ToString());
+                    Console.WriteLine(sens.Value.ToString());
+                    Console.WriteLine("dicttt");
+                }
+           }
+            else
+            {
+                Console.WriteLine("error :  not dict found" );
+            }
+            }
+
+
+        //public int GetMatchCount(string sensorType)
+        //{
+        //    for (int i = 0; i < Weaknesses.Count; i++)
+        //    {
+        //        if (Weaknesses[i].Type.ToString() == sensorType)
+        //        {
+        //            return 1;
+        //        }
+        //    }
+        //    return 0;
+        //}
 
 
         public int GetMatchCount(string sensorType)
         {
-            for (int i = 0; i < Weaknesses.Count; i++)
+            foreach(KeyValuePair<string, int> sens in sensorStatus)
             {
-                if (Weaknesses[i].Type.ToString() == sensorType)
+                if (sens.Key == sensorType && sensorStatus[sens.Key] > 0)
                 {
+                    sensorStatus[sens.Key] -= 1;
                     return 1;
                 }
             }
             return 0;
+                    
         }
 
 
-
-
-
-
-
-
-
-    }
+        }
 }
