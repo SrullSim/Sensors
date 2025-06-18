@@ -7,6 +7,7 @@
             InvestigationManager investigationManager = new InvestigationManager();
 
             investigationManager.runProcess();
+            
         }
     }
 }

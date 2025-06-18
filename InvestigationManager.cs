@@ -8,9 +8,9 @@ namespace Sensors
 {
     internal class InvestigationManager
     {
-        Agent agent = new Agent(RankAgentEnum.Foot_Soldier);
+        Agent agent = new Agent(RankAgentEnum.Squad_Leader);
         
-        private static int score = 0 ;
+        private int score = 0 ;
         private int turn { get; set; } = 0;
         public InvestigationManager() { }
 
@@ -20,7 +20,8 @@ namespace Sensors
         public void runProcess()
         {
             agent.setName(UI.setName());
-            //agent.showdict();
+            agent.showdict();
+            agent.ShowWeaknesses();
             while (score < agent.rankValue)
             {
                 if (turn <= 10)
@@ -34,36 +35,43 @@ namespace Sensors
                             agent.AddSensorToAttach("Thermal");
                             showscore();          
                             break;
+
                         case "2":
                             score += agent.GetMatchCount("Audio");
                             showscore();
                             agent.AddSensorToAttach("Audio");
                             break;
+
                         case "3":
                             score += agent.GetMatchCount("Motion");
                             showscore();
                             agent.AddSensorToAttach("Motion");
                             break;
+
                         case "4":
                             score += agent.GetMatchCount("Pulse");
                             showscore();
                             agent.AddSensorToAttach("Pulse");
                             break;
+                        
                         case "5":
                             score += agent.GetMatchCount("Magnetic");
                             showscore();
                             agent.AddSensorToAttach("Magnetic");
                             break;
+
                         case "6":
                             score += agent.GetMatchCount("Signal");
                             showscore();
-                            agent.AddSensorToAttach("signal");
+                            agent.AddSensorToAttach("Signal");
                             break;
+
                         case "7":
                             score += agent.GetMatchCount("Light");
                             showscore();
-                            agent.AddSensorToAttach("Light");
+                            agent.AddSensorToAttach("Ligth");
                             break;
+
                         default:
                             Console.WriteLine("Invalid choice, please try again.");
                             break;
@@ -72,7 +80,17 @@ namespace Sensors
                 }
                 else 
                 {
+                    Console.WriteLine("you have played 10 turns start over again");
+                    Console.WriteLine("turns before: " + turn);
+                    agent.clearWeaknesses();
+                    agent.AddSensorsToWeaknesses();
+                    agent.clearAttachedList();
+                    this.turn = 0 ;
+                    this.score = 0;
+                    Console.WriteLine("turns after: " + turn);
 
+                    Console.WriteLine("press any key to conntinue...");
+                    Console.ReadKey();
                 } 
             }
             
