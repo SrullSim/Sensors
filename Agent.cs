@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sensors.sensorsTypes;
 
 namespace Sensors
 {
@@ -12,9 +13,9 @@ namespace Sensors
 
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<string> Sensors { get; set; }
+        public List<string> attachedSensors { get; set; }
         private List<Sensor> Weaknesses { get; set; }
-        public RankAgentEnum Rank { get; set; }
+        private RankAgentEnum Rank { get; set; }
         public int rankValue { get; set; }
         public Dictionary<string, int> sensorStatus { get; set; } 
 
@@ -23,7 +24,7 @@ namespace Sensors
         public Agent(RankAgentEnum rank)
         {
             this.Rank = rank;
-            rankValue = (int)Rank;
+            this.rankValue = (int)Rank;
             this.Weaknesses = AddSensorsToWeaknesses();
             this.sensorStatus = setDictsensorStatus();
         }
@@ -40,15 +41,37 @@ namespace Sensors
             Weaknesses = new List<Sensor>();
             for (int sensors = 0; sensors < rankValue; sensors++)
             {
-                Sensor sensor = new Sensor();
-                sensor.Type = (@string)Enum.GetValues(typeof(@string)).GetValue(setIndex(rankValue));
+                sensorTypeEnum sensorType = (sensorTypeEnum)Enum.GetValues(typeof(sensorTypeEnum)).GetValue(4);
+                
+
+                Sensor sensor = FactoryOfSensors.CreateSensor(sensorType);
+                //sensor = (sensorTypeEnum)Enum.GetValues(typeof(sensorTypeEnum)).GetValue(getIndex(rankValue));
                 Weaknesses.Add(sensor);
             }
             return Weaknesses;
         }
 
+        // add sensor to attached Sensors
+        public void AddSensorToAttach(string sensorType)
+        {
+            attachedSensors.Add(sensorType);
+        }
+
+        // remove sensor from attachedSensors
+        public void RMSensorFromattachedSensors(string sensorType)
+        {
+            attachedSensors.Remove(sensorType); 
+        }
+
+        // get rank of agent for attack
+        public string getRank()
+        {
+            return this.Rank.ToString();
+        }
+
+
         // get random number for index
-        public static int setIndex(int limit)
+        public static int getIndex(int limit)
         {
             Random random = new Random();
             return random.Next(0, limit);
@@ -85,7 +108,6 @@ namespace Sensors
                         }
                     }
                     return 0;
-                    
                 }
 
 
