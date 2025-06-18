@@ -23,7 +23,6 @@ namespace Sensors
             {
                 if (turn <= 10)
                 {
-                    //agent.ShowWeaknesses();
                     string choice = UI.menu();
                     switch (choice)
                     {
