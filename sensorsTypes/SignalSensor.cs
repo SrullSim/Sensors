@@ -12,8 +12,6 @@ namespace Sensors.sensorsTypes
 
 
 
-
-
         public SignalSensor(sensorTypeEnum type)
         {
             Type = type;

@@ -12,15 +12,15 @@ namespace Sensors.sensorsTypes
         public static Sensor CreateSensor(sensorTypeEnum type)
         {
             switch (type)
-            {
+            { 
                 case sensorTypeEnum.Thermal:
                     return new ThermalSensor(type);
 
-                case sensorTypeEnum.Audio:
-                    return new AudioSensor( type);
-                
                 case sensorTypeEnum.Motion:
                     return new MotionSensor( type);
+                
+                case sensorTypeEnum.Audio:
+                    return new AudioSensor( type);
                 
                 case sensorTypeEnum.Pulse:
                     return new PulseSensor( type);

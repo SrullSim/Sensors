@@ -9,8 +9,9 @@ namespace Sensors.sensorsTypes
 
     public enum sensorTypeEnum
     {
-        Thermal,
+        
         Audio,
+        Thermal, 
         Motion,
         Pulse,
         Magnetic,
