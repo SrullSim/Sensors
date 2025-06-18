@@ -22,7 +22,6 @@ namespace Sensors
         // This method displays the menu and returns the user's choice
         public static string menu()
         {
-            //Console.Clear();
             Console.WriteLine("======= Welcome to Game Investigation ======= ");
             Console.WriteLine("please enter the sensor type");
             Console.WriteLine("1.Thermal \n2.Audio \n3.Motion \n4.Pulse \n5.Magnetic \n6.Signal \n7.Light ");

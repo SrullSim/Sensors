@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sensors
+namespace Sensors.sensorsTypes
 {
 
-     public enum @string
+    public enum sensorTypeEnum
     {
         Thermal,
         Audio,
@@ -17,25 +17,17 @@ namespace Sensors
         Signal,
         Light
     }
-
-
-
-    internal class Sensor
+    internal abstract class Sensor
     {
-        public @string Type { get; set; }
+        public sensorTypeEnum Type { get; set; }
+        public int? Disability { get; set; }
 
-
+        // constractor
         public Sensor() { }
 
         void Activate()
         {
 
         }
-
-
-
-
-
-
     }
 }
