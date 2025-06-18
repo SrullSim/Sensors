@@ -7,19 +7,22 @@ using System.Threading.Tasks;
 namespace Sensors
 {
 
-     public enum SensorType
+     public enum @string
     {
         Thermal,
         Audio,
         Motion,
-        light
+        Pulse,
+        Magnetic,
+        Signal,
+        Light
     }
 
 
 
     internal class Sensor
     {
-        public SensorType Type { get; set; }
+        public @string Type { get; set; }
 
 
         public Sensor() { }

@@ -10,7 +10,12 @@ namespace Sensors
     {
 
 
-
+        public static string setName()
+        {
+            Console.WriteLine("enter the agent name");
+            string name = Console.ReadLine();
+            return name;
+        }
 
 
 
@@ -20,7 +25,7 @@ namespace Sensors
             //Console.Clear();
             Console.WriteLine("======= Welcome to Game Investigation ======= ");
             Console.WriteLine("please enter the sensor type");
-            Console.WriteLine("1.Thermal \n2.Audio \n3.Motion \n4.light");
+            Console.WriteLine("1.Thermal \n2.Audio \n3.Motion \n4.Pulse \n5.Magnetic \n6.Signal \n7.Light ");
 
             // take choice from player
             string sensorName = Console.ReadLine();
