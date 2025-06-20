@@ -14,7 +14,15 @@ namespace Sensors
         {
             Console.WriteLine("enter the agent name");
             string name = Console.ReadLine();
-            return name;
+            if(name != null || name.All(char.IsLetter))
+            {
+                return name;
+            }
+            else
+            {
+                Console.WriteLine("Invalid name, please try again");
+                return "";
+            }
         }
 
 
