@@ -20,9 +20,7 @@ namespace Sensors.sensorsTypes
         // activate
         public string Activate(Agent agent)
         {
-            return agent.getRank();
+            return agent.getStringRank();
         }
-
-
     }
 }

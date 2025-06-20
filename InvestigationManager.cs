@@ -44,9 +44,32 @@ namespace Sensors
                 {
                     restart();
                 }
+                if (this.score >= agent.rankValue)
+                {
+                    // set level up
+                    var (nextRank, hasChanged) = AgentLevel.GetNextRank(agent.getRank());
+
+                    // restart the agent
+                    restart();
+                    this.agent.setRankValue((int)agent.getRank()); 
+                    // checked if chenge or finish the game
+                    if (hasChanged)
+                    {
+                        agent.setRank(nextRank);
+                        Console.WriteLine($"התקדמת לדרגה: {nextRank}");
+                        this.score = 0;
+                        this.turn = 0;
+                    }
+                    else
+                    {
+                        Console.WriteLine("הגעת לדרגה הגבוהה ביותר!");
+                        this.isGameOver = true;
+                    }
+                    
+                }
+
             }
             while (!isGameOver);
-
 
         }
         public void showscore()
@@ -75,8 +98,8 @@ namespace Sensors
             switch (choice)
             {
                 case "1":
-                    score += agent.GetMatchCount("Thermal");
-                    agent.AddSensorToAttach("Thermal");
+                    this.score += this.agent.GetMatchCount("Thermal");
+                    this.agent.AddSensorToAttach("Thermal");
                     showscore();
                     break;
 
@@ -107,7 +130,8 @@ namespace Sensors
                 case "6":
                     score += agent.GetMatchCount("Signal");
                     showscore();
-                    agent.AddSensorToAttach("Signal");
+                    agent.AddSensorToAttach("Signal");        
+
                     break;
 
                 case "7":
@@ -121,8 +145,6 @@ namespace Sensors
                     break;
             }
         }
-
-
 
     }
 }

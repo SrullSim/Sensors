@@ -138,6 +138,21 @@ namespace Sensors
             return this.Rank;
         }
 
+        // set rank
+        public void setRank(RankAgentEnum rank)
+        {
+            this.Rank = rank;
+        }
+
+        // set rank value
+        public void setRankValue(int value)
+        {
+            this.rankValue = value;
+        }
+
+
+
+
         // testing
         public void showdict()
         {
