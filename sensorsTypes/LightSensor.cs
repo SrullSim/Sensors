@@ -13,14 +13,14 @@ namespace Sensors.sensorsTypes
 
 
 
-        public LightSensor(sensorTypeEnum type)
+        public  LightSensor(sensorTypeEnum type)
         {
             Type = type;
         }
 
 
         // activate
-        public string Activate(Agent agent)
+        public  string  Activate(Agent agent)
         {
             string agentDetails ="agent details: \n  name - " + agent.Name + " \n  Rank - " + agent.getRank();
             return agentDetails;

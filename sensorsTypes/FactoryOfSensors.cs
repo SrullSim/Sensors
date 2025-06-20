@@ -40,26 +40,6 @@ namespace Sensors.sensorsTypes
         }
 
 
-        //public static Sensor CreateSensor(string sensorType)
-        //{
-        //    // המרת המחרוזת לערך Enum (עם התעלמות מרישיות)
-        //    if (!Enum.TryParse(sensorType, true, out sensorTypeEnum type))
-        //        throw new ArgumentException($"Invalid sensor type: {sensorType}");
-
-        //    // יצירת האובייקט המתאים לפי הערך ב-Enum
-        //    return type switch
-        //    {
-        //        sensorTypeEnum.Thermal => new ThermalSensor(),
-        //        sensorTypeEnum.Audio => new AudioSensor(),
-        //        sensorTypeEnum.Motion => new MotionSensor(),
-        //        sensorTypeEnum.Pulse => new PulseSensor(),
-        //        sensorTypeEnum.Magnetic => new MagneticSensor(),
-        //        sensorTypeEnum.Signal => new SignalSensor(),
-        //        sensorTypeEnum.Light => new LightSensor(),
-        //        _ => throw new NotSupportedException($"Unhandled sensor type: {type}")
-        //    };
-        //}
-
 
 
 

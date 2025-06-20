@@ -85,7 +85,7 @@ namespace Sensors
         }
 
         // get rank of agent for attack
-        public string getRank()
+        public string getStringRank()
         {
             return this.Rank.ToString();
         }
@@ -132,6 +132,11 @@ namespace Sensors
             return 0;
         }
 
+        // get rank 
+        public RankAgentEnum getRank()
+        {
+            return this.Rank;
+        }
 
         // testing
         public void showdict()
